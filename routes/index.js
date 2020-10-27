@@ -69,7 +69,6 @@ router.post("/upload", upload.single("file"), async (req, res, next) => {
 
 router.get("/getall", async (req, res) => {
   const image = await Image.find();
-
   res.json(image);
 });
 

@@ -7,8 +7,8 @@ const { Schema } = mongoose;
 const productSchema = new Schema(
   {
     author: {
-      type: String,
-      ref: "user",
+      type: Schema.Types.ObjectId,
+      ref: "users",
     },
     productname: {
       type: String,
@@ -18,9 +18,26 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    image: [
+    productQuantity: {
+      type: String,
+    },
+    productImagePath:{
+      type:String
+    },
+    image: {
+      type: Schema.Types.ObjectId,
+      ref: "image",
+    },
+    like:{
+        type:Schema.Types.ObjectId,
+        ref:"likes"
+    },
+    liked: [
       {
-        type: String,
+        author: {
+          type: Schema.Types.ObjectId,
+          ref: "users",
+        },
       },
     ],
   },
@@ -29,4 +46,4 @@ const productSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("product", productSchema);
+module.exports = mongoose.model("products", productSchema);
