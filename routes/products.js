@@ -140,6 +140,7 @@ router.delete("/delete/:id", auth, async (req, res) => {
   }
 });
 
+
 // routes to update products
 
 router.post("/update/:id", auth, async (req, res) => {
@@ -164,6 +165,29 @@ router.post("/update/:id", auth, async (req, res) => {
     console.log(error);
   }
 });
+
+router.post("/increment",auth, async (req,res)=>{
+  try {
+    const { productQuantity} = req.body;
+
+    const productfields = {
+     productQuantity
+    };
+
+    const product = await Productmodel.findOneAndUpdate(
+      {
+        _id: req.body.id,
+      },
+      { $set: productfields },
+      { new: true, upsert: true }
+    );
+    res.json(product);
+  } catch (error) {
+    res.status(500).send("server error");
+    console.log(error);
+  }
+
+})
 
 router.put("/like", auth, async (req, res) => {
   try {

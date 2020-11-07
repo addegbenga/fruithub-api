@@ -1,3 +1,4 @@
+// const { boolean } = require("joi");
 const mongoose = require("mongoose");
 const { schema } = require("./Image");
 const Image = require("./Image");
@@ -19,18 +20,22 @@ const productSchema = new Schema(
       required: true,
     },
     productQuantity: {
-      type: String,
+      type: Number,
     },
-    productImagePath:{
-      type:String
+    productImagePath: {
+      type: String,
     },
     image: {
       type: Schema.Types.ObjectId,
       ref: "image",
     },
-    like:{
-        type:Schema.Types.ObjectId,
-        ref:"likes"
+    inCart: {
+      type: Boolean,
+      default: false,
+    },
+    like: {
+      type: Schema.Types.ObjectId,
+      ref: "likes",
     },
     liked: [
       {
